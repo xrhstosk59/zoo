@@ -12,13 +12,14 @@ import { createpromitheutisForm, handlepromitheutisDelete } from './promitheutis
 export async function loadData(section, page = 1) {
     try {
         const encodedSection = encodeURIComponent(section);
-        const response = await fetch(`/db2/student_2410/ZWOLOGIKOS_KHPOS/db.php?section=${encodedSection}&page=${page}`);
-        
+        // Χρήση relative path για καλύτερη φορητότητα
+        const response = await fetch(`./db.php?section=${encodedSection}&page=${page}`);
+
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message);
         }
-        
+
         return await response.json();
     } catch (error) {
         console.error('Error:', error);
