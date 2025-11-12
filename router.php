@@ -1,31 +1,33 @@
 <?php
 // Router script for PHP built-in server
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$filepath = __DIR__ . $uri;
 
-$requestUri = $_SERVER['REQUEST_URI'];
-$requestPath = parse_url($requestUri, PHP_URL_PATH);
-$filePath = __DIR__ . $requestPath;
-
-// If requesting a directory, look for index.html or index.php
-if (is_dir($filePath)) {
-    if (file_exists($filePath . '/index.html')) {
-        $filePath = $filePath . '/index.html';
-    } elseif (file_exists($filePath . '/index.php')) {
-        $filePath = $filePath . '/index.php';
+// Handle directory requests
+if (is_dir($filepath)) {
+    if (file_exists($filepath . '/index.html')) {
+        $filepath .= '/index.html';
+    } elseif (file_exists($filepath . '/index.php')) {
+        $filepath .= '/index.php';
+    } else {
+        http_response_code(404);
+        return true;
     }
 }
 
-// If file exists and is not a PHP file, serve it directly
-if (file_exists($filePath) && !preg_match('/\.php$/', $filePath)) {
-    return false; // Let PHP built-in server handle static files
+// If file exists
+if (file_exists($filepath)) {
+    // If it's a PHP file, execute it
+    if (pathinfo($filepath, PATHINFO_EXTENSION) === 'php') {
+        // Change to the file's directory for relative paths
+        chdir(dirname($filepath));
+        include $filepath;
+        return true;
+    }
+    // For static files (HTML, JS, CSS, etc), let the server serve them
+    return false;
 }
 
-// If it's a PHP file and exists, execute it
-if (file_exists($filePath) && preg_match('/\.php$/', $filePath)) {
-    require $filePath;
-    return true;
-}
-
-// If file doesn't exist, return 404
+// 404 for non-existent files
 http_response_code(404);
-echo "404 - File not found";
 return true;
