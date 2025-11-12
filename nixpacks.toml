@@ -5,4 +5,4 @@ nixPkgs = ["php82", "php82Extensions.mysqli"]
 cmds = []
 
 [start]
-cmd = "php -S 0.0.0.0:$PORT -t . router.php"
+cmd = "cd /app && php -S 0.0.0.0:$PORT -t /app"
