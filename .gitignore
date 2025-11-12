@@ -1,5 +1,5 @@
 # Configuration files with sensitive data
-config.php
+# config.php is now safe to commit (uses environment variables)
 .env
 
 # Operating System Files
