@@ -3,7 +3,7 @@
     "description": "Zoo Management System",
     "type": "project",
     "require": {
-        "php": ">=7.4",
+        "php": "^8.2",
         "ext-mysqli": "*"
     }
 }
