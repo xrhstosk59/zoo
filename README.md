@@ -1,6 +1,13 @@
 # Σύστημα Διαχείρισης Ζωολογικού Κήπου 🦁
 
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://zoo-production.up.railway.app)
+[![Railway](https://img.shields.io/badge/Deployed%20on-Railway-blueviolet)](https://railway.app)
+[![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php)](https://www.php.net)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com)
+
 Ένα ολοκληρωμένο web-based σύστημα διαχείρισης για ζωολογικούς κήπους, αναπτυγμένο ως εργασία εξαμήνου στο τμήμα Πληροφορικής.
+
+**🌐 Live Demo**: [https://zoo-production.up.railway.app](https://zoo-production.up.railway.app)
 
 ## 📋 Περιγραφή
 
@@ -99,11 +106,11 @@ zoo/
 │   └── eidos.js
 ├── EISITIRIO/                  # Διαχείριση εισιτηρίων
 ├── EKDILOSI/                   # Διαχείριση εκδηλώσεων
+├── EPISKEPTIS/                 # Διαχείριση επισκεπτών
+├── FRONTISTIS/                 # Διαχείριση φροντιστών
+├── PROMITHEUTIS/               # Διαχείριση προμηθευτών
 ├── TAMIAS/                     # Διαχείριση ταμιών
 ├── ZWO/                        # Διαχείριση ζώων
-├── episkeptis/                 # Διαχείριση επισκεπτών
-├── frontistis/                 # Διαχείριση φροντιστών
-├── promitheutis/               # Διαχείριση προμηθευτών
 ├── .env.example                # Environment variables template
 ├── .gitignore                  # Git ignore rules
 ├── RAILWAY_DEPLOYMENT.md       # Railway deployment guide
@@ -278,7 +285,9 @@ zoo/
 
 ## 🌐 Live Demo
 
-**Production (Railway)**: https://zoo-production.up.railway.app *(αν έχει γίνει deploy)*
+**Production (Railway)**: [https://zoo-production.up.railway.app](https://zoo-production.up.railway.app)
+
+Το σύστημα είναι live και λειτουργικό! 🚀
 
 ---
 
