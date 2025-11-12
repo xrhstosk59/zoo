@@ -2,7 +2,6 @@
 nixPkgs = ["php82", "php82Extensions.mysqli"]
 
 [phases.install]
-cmds = []
 
 [start]
-cmd = "cd /app && php -S 0.0.0.0:$PORT -t /app"
+cmd = "php -S 0.0.0.0:$PORT"
