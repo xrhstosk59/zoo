@@ -1,11 +1,11 @@
 // Import all operations
-import { createZwoForm, handleZwoDelete } from './zwo/zwo.js';
-import { createTamiasForm, handleTamiasDelete } from './tamias/tamias.js';
+import { createZwoForm, handleZwoDelete } from './ZWO/zwo.js';
+import { createTamiasForm, handleTamiasDelete } from './TAMIAS/tamias.js';
 import { createFrontistisForm, handleFrontistisDelete } from './frontistis/frontistis.js';
 import { createepiskeptisForm, handleepiskeptisDelete } from './episkeptis/episkeptis.js';
-import { createEisitirioForm, handleEisitirioDelete } from './eisitirio/eisitirio.js';
-import { createEkdilosiForm, handleEkdilosiDelete } from './ekdilosi/ekdilosi.js';
-import { createeidosForm, handleeidosDelete } from './eidos/eidos.js';
+import { createEisitirioForm, handleEisitirioDelete } from './EISITIRIO/eisitirio.js';
+import { createEkdilosiForm, handleEkdilosiDelete } from './EKDILOSI/ekdilosi.js';
+import { createeidosForm, handleeidosDelete } from './EIDOS/eidos.js';
 import { createpromitheutisForm, handlepromitheutisDelete } from './promitheutis/promitheutis.js';
 
 // script.js

@@ -1,0 +1,20 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Set correct MIME types for JavaScript modules
+AddType application/javascript .js
+AddType text/css .css
+
+# Allow CORS for modules (if needed)
+<FilesMatch "\.(js|css)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
+# UTF-8 encoding
+AddDefaultCharset UTF-8
+
+# Prevent directory listing
+Options -Indexes
+
+# Serve index.html for root
+DirectoryIndex index.html index.php
