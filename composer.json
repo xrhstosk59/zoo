@@ -1,0 +1,9 @@
+{
+    "name": "zoo/zoo-management",
+    "description": "Zoo Management System",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "ext-mysqli": "*"
+    }
+}
