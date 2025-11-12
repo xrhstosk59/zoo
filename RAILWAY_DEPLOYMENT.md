@@ -17,16 +17,22 @@
 
 ## Βήμα 3: Import της Βάσης Δεδομένων
 
-1. Στο Railway, πάτα στο **MySQL service**
-2. Πήγαινε στο tab **"Connect"**
-3. Αντίγραψε τη **MySQL Connection URL**
-4. Χρησιμοποίησε ένα MySQL client για import:
+### Επιλογή Α: Με MySQL Command Line (Προτεινόμενο)
 
-### Με TablePlus / MySQL Workbench / DBeaver:
-- Σύνδεση με τα Railway MySQL credentials
-- Import το αρχείο `zwologikos_khpos.sql`
+```bash
+# Εγκατάσταση MySQL client (αν δεν το έχεις)
+brew install mysql-client  # macOS
+# ή
+apt-get install mysql-client  # Linux
 
-### Με Railway CLI:
+# Import της βάσης
+mysql -h [HOST] -P [PORT] -u [USERNAME] -p[PASSWORD] [DATABASE] < zwologikos_khpos.sql
+```
+
+**Credentials:** Θα τα βρεις στο Railway → MySQL service → "Connect" tab
+
+### Επιλογή Β: Με Railway CLI
+
 ```bash
 # Εγκατάσταση
 npm i -g @railway/cli
@@ -38,42 +44,100 @@ railway link
 # Connect στη βάση
 railway connect MySQL
 
-# Import
+# Import (μέσα στο MySQL shell)
 source zwologikos_khpos.sql
 ```
 
+### Επιλογή Γ: Με GUI Tool (TablePlus/MySQL Workbench)
+
+1. Κατέβασε **TablePlus** (free): https://tableplus.com
+2. New connection → MySQL
+3. Βάλε τα credentials από το Railway
+4. Connect και import το `zwologikos_khpos.sql`
+
 ## Βήμα 4: Ρυθμίσεις Environment Variables
 
-Το Railway **αυτόματα** δημιουργεί τα MySQL variables.
+Το Railway **αυτόματα** προτείνει τα MySQL variables!
 
-Στο **PHP service** → **Variables**, πρόσθεσε:
+1. Πήγαινε στο **zoo service** (όχι το MySQL)
+2. Tab **"Variables"**
+3. Θα δεις "Suggested Variables" με:
+   - `DB_HOST` → `MySQL.MYSQLHOST`
+   - `DB_USERNAME` → `MySQL.MYSQLUSER`
+   - `DB_PASSWORD` → `MySQL.MYSQLPASSWORD`
+   - `DB_DATABASE` → `MySQL.MYSQLDATABASE`
+4. Πάτα το κουμπί **"Add"**
+
+Αυτό θα κάνει auto-redeploy το app με τις σωστές ρυθμίσεις!
+
+## Βήμα 5: Deploy & Test
+
+1. Μετά την προσθήκη των variables, το Railway κάνει αυτόματα deploy
+2. Περίμενε 1-2 λεπτά για το deployment
+3. Πάτα στο deployment URL για να δεις την εφαρμογή
+
+**URL Format:** `https://zoo-production.up.railway.app`
+
+## Troubleshooting
+
+### Δεν συνδέεται η βάση
+
+1. Έλεγξε τα Variables: Railway → zoo service → "Variables"
+2. Βεβαιώσου ότι όλα τα 4 variables είναι ορισμένα
+3. Δες τα Logs: Railway → zoo service → "Logs"
+
+**Κοινό Error:**
 ```
-DB_HOST=${{MySQL.MYSQLHOST}}
-DB_USERNAME=${{MySQL.MYSQLUSER}}
-DB_PASSWORD=${{MySQL.MYSQLPASSWORD}}
-DB_DATABASE=${{MySQL.MYSQLDATABASE}}
+Database connection error
+```
+**Λύση:** Επιβεβαίωσε ότι τα MySQL variables έχουν προστεθεί
+
+### Δεν βλέπω δεδομένα
+
+1. Σύνδεσου στο Railway MySQL με TablePlus
+2. Τρέξε: `SHOW TABLES;`
+3. Αν δεν υπάρχουν πίνακες, ξανακάνε import
+4. Έλεγξε: `SELECT COUNT(*) FROM zwo;` (πρέπει να δείξει 65+)
+
+### Import Errors
+
+**Error: "Foreign key constraint"**
+- Η βάση έχει foreign keys που μπορεί να προκαλέσουν θέματα
+- Χρησιμοποίησε την προετοιμασμένη έκδοση χωρίς FKs
+
+**Error: "Table already exists"**
+- Drop και recreate τη βάση:
+```sql
+DROP DATABASE IF EXISTS railway;
+CREATE DATABASE railway CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE railway;
 ```
 
-## Βήμα 5: Deploy
+### Railway Service Won't Start
 
-1. Push στο GitHub:
-```bash
-git push
-```
-
-2. Το Railway θα κάνει auto-deploy
-
-3. Ανοιξε το deployment URL για test
+1. Έλεγξε τα Logs για specific errors
+2. Βεβαιώσου ότι το PHP version είναι 7.4+
+3. Επιβεβαίωσε ότι όλα τα αρχεία έχουν push στο GitHub
 
 ---
 
-## Local Development με XAMPP
+## Local Development
 
-Το project δουλεύει αυτόματα τοπικά με:
-- Host: `localhost`
-- Username: `root`
-- Password: `` (κενό)
-- Database: `zwologikos_khpos`
+Για να δουλεύει τοπικά με XAMPP:
+
+```bash
+# Δεν χρειάζεται .env αρχείο!
+# Το db_connection.php χρησιμοποιεί αυτόματα:
+DB_HOST=localhost
+DB_USERNAME=root
+DB_PASSWORD=
+DB_DATABASE=zwologikos_khpos
+```
+
+Απλά βεβαιώσου ότι:
+- Το XAMPP τρέχει Apache + MySQL
+- Η βάση `zwologikos_khpos` υπάρχει
+- Τα δεδομένα έχουν import
 
 ---
 
@@ -81,17 +145,23 @@ git push
 
 - **Starter Plan**: $5 credit/μήνα (free)
 - **MySQL**: ~$5/μήνα
-- **PHP hosting**: Free με credits
+- **PHP hosting**: Καλύπτεται από τα credits
+
+Αν τελειώσουν τα credits:
+- **Hobby Plan**: $5/μήνα
 
 ---
 
-## Troubleshooting
+## Χρήσιμα Links
 
-### Δεν συνδέεται η βάση:
-1. Έλεγξε τα Variables στο Railway
-2. Δες τα Logs: PHP service → "Logs"
+- **Railway Docs**: https://docs.railway.app
+- **MySQL CLI Docs**: https://dev.mysql.com/doc/refman/8.0/en/mysql.html
+- **TablePlus**: https://tableplus.com
+- **Project GitHub**: https://github.com/xrhstosk59/zoo
 
-### Δεν βλέπω δεδομένα:
-1. Σύνδεσου στο Railway MySQL
-2. Τρέξε: `SHOW TABLES;`
-3. Αν είναι άδεια, ξανακάνε import
+---
+
+**Tip:** Κράτα το `zwologikos_khpos.sql` ενημερωμένο για backups!
+```bash
+mysqldump -h HOST -P PORT -u USER -pPASSWORD DATABASE > backup_$(date +%Y%m%d).sql
+```

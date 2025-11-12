@@ -30,91 +30,90 @@
 ## 📦 Εγκατάσταση
 
 ### Προαπαιτούμενα
-- Web Server (Apache/Nginx)
+- Web Server (Apache/Nginx) ή XAMPP
 - PHP 7.4 ή νεότερη έκδοση
 - MySQL 5.7+ ή MariaDB 10.2+
 - Browser με υποστήριξη ES6 modules
 
-### Βήματα Εγκατάστασης
+### 🚀 Quick Start με XAMPP (Local Development)
 
 1. **Clone το repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/xrhstosk59/zoo.git
    cd zoo
    ```
 
-2. **Δημιούργησε τη βάση δεδομένων**
-   ```sql
-   CREATE DATABASE student_2410 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-   ```
+2. **Ρύθμιση XAMPP**
+   - Ξεκίνα το Apache και MySQL από το XAMPP Control Panel
+   - Τοποθέτησε το project στο `htdocs` folder του XAMPP
 
-3. **Import το database schema**
-   ```bash
-   mysql -u username -p student_2410 < database/schema.sql
-   ```
-   *(Σημείωση: Το schema file πρέπει να δημιουργηθεί από το υπάρχον database)*
+3. **Δημιούργησε τη βάση δεδομένων**
+   - Άνοιξε http://localhost/phpmyadmin
+   - Δημιούργησε νέα βάση: `zwologikos_khpos`
+   - Import το αρχείο `zwologikos_khpos.sql` (αν το έχεις)
 
-4. **Ρύθμιση Configuration**
-   ```bash
-   cp config.example.php config.php
-   ```
-   Άνοιξε το `config.php` και συμπλήρωσε τα στοιχεία της βάσης δεδομένων σου:
-   ```php
-   'database' => [
-       'host' => 'localhost',
-       'username' => 'your_username',
-       'password' => 'your_password',
-       'database' => 'your_database',
-       'charset' => 'utf8mb4'
-   ]
-   ```
-
-5. **Ρύθμιση Web Server**
-
-   Βεβαιώσου ότι το document root δείχνει στον φάκελο του project.
-
-   **Apache (.htaccess)**
-   ```apache
-   RewriteEngine On
-   RewriteBase /
-   ```
-
-   **Nginx**
-   ```nginx
-   location / {
-       try_files $uri $uri/ /index.html;
-   }
-   ```
-
-6. **Άνοιξε στο browser**
+4. **Η εφαρμογή είναι έτοιμη!**
    ```
    http://localhost/zoo
    ```
+
+   Το `db_connection.php` χρησιμοποιεί αυτόματα default τιμές για XAMPP:
+   - Host: `localhost`
+   - Username: `root`
+   - Password: `` (κενό)
+   - Database: `zwologikos_khpos`
+
+### ☁️ Deployment στο Railway
+
+Για production deployment στο Railway, δες τις αναλυτικές οδηγίες στο [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md)
+
+**Σύντομα βήματα:**
+1. Push το project στο GitHub
+2. Σύνδεση Railway με GitHub
+3. Προσθήκη MySQL service
+4. Import της βάσης
+5. Ρύθμιση Environment Variables
+6. Auto-deploy!
+
+### 🔧 Environment Variables
+
+Το project υποστηρίζει environment variables για production deployments:
+
+```env
+DB_HOST=your_mysql_host
+DB_USERNAME=your_mysql_user
+DB_PASSWORD=your_mysql_password
+DB_DATABASE=zwologikos_khpos
+```
+
+Για local development, δεν χρειάζεται να ορίσεις τίποτα - χρησιμοποιούνται αυτόματα οι XAMPP defaults.
 
 ## 🗂️ Δομή Project
 
 ```
 zoo/
-├── EIDOS/              # Διαχείριση ειδών ζώων
+├── EIDOS/                      # Διαχείριση ειδών ζώων
 │   ├── add_eidos.php
 │   ├── update_eidos.php
 │   ├── delete_eidos.php
 │   └── eidos.js
-├── EISITIRIO/          # Διαχείριση εισιτηρίων
-├── EKDILOSI/           # Διαχείριση εκδηλώσεων
-├── TAMIAS/             # Διαχείριση ταμιών
-├── ZWO/                # Διαχείριση ζώων
-├── episkeptis/         # Διαχείριση επισκεπτών
-├── frontistis/         # Διαχείριση φροντιστών
-├── promitheutis/       # Διαχείριση προμηθευτών
-├── config.example.php  # Configuration template
-├── config.php          # Configuration file (gitignored)
-├── db_connection.php   # Database connection class
-├── db.php              # API endpoint για data fetching
-├── index.html          # Main HTML file
-├── script.js           # Main JavaScript module
-├── style.css           # Stylesheet
-└── ValidationFunctions.js  # Validation utilities
+├── EISITIRIO/                  # Διαχείριση εισιτηρίων
+├── EKDILOSI/                   # Διαχείριση εκδηλώσεων
+├── TAMIAS/                     # Διαχείριση ταμιών
+├── ZWO/                        # Διαχείριση ζώων
+├── episkeptis/                 # Διαχείριση επισκεπτών
+├── frontistis/                 # Διαχείριση φροντιστών
+├── promitheutis/               # Διαχείριση προμηθευτών
+├── .env.example                # Environment variables template
+├── .gitignore                  # Git ignore rules
+├── RAILWAY_DEPLOYMENT.md       # Railway deployment guide
+├── db_connection.php           # Database connection με env vars
+├── db.php                      # API endpoint για data fetching
+├── index.html                  # Main HTML file
+├── script.js                   # Main JavaScript module
+├── style.css                   # Stylesheet
+├── ValidationFunctions.js      # Validation utilities
+└── zwologikos_khpos.sql        # Database backup (gitignored)
 ```
 
 ## 🔒 Ασφάλεια
@@ -130,10 +129,10 @@ zoo/
 
 ### ⚠️ Σημαντικές Σημειώσεις Ασφαλείας
 
-1. **ΜΗΝ κάνεις commit** το αρχείο `config.php`
-2. **Άλλαξε τον κωδικό** της βάσης δεδομένων αν ήταν exposed
-3. **Χρησιμοποίησε HTTPS** σε production environment
-4. **Ενεργοποίησε production mode** στο config.php όταν το deploy
+1. **ΜΗΝ κάνεις commit** τα αρχεία `.env` ή `zwologikos_khpos.sql`
+2. **ΜΗΝ κάνεις commit** τους κωδικούς της βάσης δεδομένων
+3. **Χρησιμοποίησε HTTPS** σε production environment (Railway το κάνει αυτόματα)
+4. **Χρησιμοποίησε Environment Variables** για όλα τα credentials σε production
 
 ## 🎯 Χαρακτηριστικά
 
@@ -173,18 +172,28 @@ zoo/
 
 ### Δεν εμφανίζονται δεδομένα
 - Έλεγξε το browser console για errors
-- Βεβαιώσου ότι το `config.php` έχει τα σωστά credentials
-- Έλεγξε ότι ο web server τρέχει
+- Βεβαιώσου ότι το XAMPP (Apache + MySQL) τρέχει
+- Έλεγξε ότι η βάση `zwologikos_khpos` υπάρχει και έχει δεδομένα
 
-### Database connection error
-- Επιβεβαίωσε ότι η MySQL service τρέχει
-- Έλεγξε τα credentials στο `config.php`
-- Βεβαιώσου ότι η βάση δεδομένων έχει δημιουργηθεί
+### Database connection error (Local)
+- Επιβεβαίωσε ότι το XAMPP MySQL τρέχει
+- Έλεγξε ότι η βάση λέγεται `zwologikos_khpos`
+- Βεβαιώσου ότι το username είναι `root` με κενό password
+
+### Database connection error (Railway)
+- Έλεγξε ότι τα Environment Variables είναι ορισμένα στο Railway
+- Βεβαιώσου ότι το MySQL service τρέχει
+- Δες τα Logs στο Railway για περισσότερες λεπτομέρειες
 
 ### Module import errors
 - Βεβαιώσου ότι ο browser υποστηρίζει ES6 modules
 - Έλεγξε ότι τα paths στα imports είναι σωστά
 - Χρησιμοποίησε web server (όχι file://)
+
+### Railway Deployment Issues
+- Δες το [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md) για troubleshooting tips
+- Έλεγξε τα Logs: Railway → zoo service → "Logs" tab
+- Επιβεβαίωσε ότι όλα τα Environment Variables έχουν οριστεί
 
 ## 📚 API Endpoints
 
@@ -247,6 +256,14 @@ zoo/
 
 ## 🔄 Recent Updates
 
+### v2.0 - Railway Deployment Ready (2025-11-12)
+- ✅ **Environment Variables Support** - Υποστήριξη για production deployments
+- ✅ **Railway Deployment** - Πλήρες deployment guide
+- ✅ **Database Migration** - Import στο Railway MySQL επιτυχώς
+- ✅ **Updated README** - Νέες οδηγίες για XAMPP και Railway
+- ✅ **Simplified Configuration** - Αυτόματη ρύθμιση για local development
+
+### v1.0 - Initial Release
 - ✅ Μετακίνηση credentials σε configuration file
 - ✅ Προσθήκη .gitignore
 - ✅ Security improvements
@@ -259,8 +276,22 @@ zoo/
 
 ---
 
+## 🌐 Live Demo
+
+**Production (Railway)**: https://zoo-production.up.railway.app *(αν έχει γίνει deploy)*
+
+---
+
+## 📖 Documentation
+
+- **[README.md](./README.md)** - Αυτό το αρχείο
+- **[RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md)** - Οδηγίες για Railway deployment
+- **[.env.example](./.env.example)** - Environment variables template
+
+---
+
 **Σημείωση**: Πριν κάνεις deploy σε production environment, βεβαιώσου ότι έχεις:
-1. Αλλάξει όλους τους default κωδικούς
-2. Ενεργοποιήσει HTTPS
-3. Ρυθμίσει το environment σε 'production' στο config.php
-4. Ελέγξει όλα τα security settings
+1. Ρυθμίσει τα Environment Variables στο Railway
+2. Import την βάση δεδομένων στο Railway MySQL
+3. Προσθέσει τα MySQL connection variables στο zoo service
+4. Ελέγξει τα Logs για τυχόν errors

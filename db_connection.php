@@ -7,51 +7,27 @@ class Database {
     private $conn;
 
     public function __construct() {
-        // Διάβασμα από environment variables με fallback σε default τιμές
+        // Διάβασμα από environment variables με fallback σε default τιμές για local development
         $this->host = getenv('DB_HOST') ?: 'localhost';
         $this->username = getenv('DB_USERNAME') ?: 'root';
         $this->password = getenv('DB_PASSWORD') ?: '';
         $this->database = getenv('DB_DATABASE') ?: 'zwologikos_khpos';
 
         try {
-            // Φόρτωση configuration
-            $config = require_once __DIR__ . '/config.php';
-
-            if (!isset($config['database'])) {
-                throw new Exception("Database configuration not found");
-            }
-
-            $this->host = $config['database']['host'];
-            $this->username = $config['database']['username'];
-            $this->password = $config['database']['password'];
-            $this->database = $config['database']['database'];
-
-            // Σύνδεση στη βάση
             $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
 
             if (!$this->conn) {
                 throw new Exception(mysqli_connect_error());
             }
 
-            // Ορισμός charset
-            $charset = isset($config['database']['charset']) ? $config['database']['charset'] : 'utf8mb4';
-            $this->conn->set_charset($charset);
-
-            // Ρύθμιση error reporting βάσει environment
-            $env = isset($config['environment']) ? $config['environment'] : 'production';
-            if (isset($config['error_reporting'][$env])) {
-                $errorSettings = $config['error_reporting'][$env];
-                ini_set('display_errors', $errorSettings['display_errors']);
-                ini_set('log_errors', $errorSettings['log_errors']);
-                error_reporting($errorSettings['error_level']);
-            }
+            $this->conn->set_charset("utf8mb4");
 
         } catch (Exception $e) {
-            error_log("Database Error: " . $e->getMessage());
+            error_log($e->getMessage());
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode([
                 "status" => "error",
-                "message" => "Database connection error. Please check your configuration."
+                "message" => "Database connection error: " . $e->getMessage()
             ]);
             exit;
         }
