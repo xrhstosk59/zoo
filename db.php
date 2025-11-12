@@ -25,66 +25,66 @@ try {
 
     switch($section) {
         case 'Ζώα':
-            $totalRows = $db->query("SELECT COUNT(*) as count FROM ZWO")->fetch_assoc()['count'];
+            $totalRows = $db->query("SELECT COUNT(*) as count FROM zwo")->fetch_assoc()['count'];
             $stmt = $db->prepare("
                 SELECT z.Kodikos, z.Onoma, z.Etos_Genesis, z.Onoma_Eidous
-                FROM ZWO z
+                FROM zwo z
                 ORDER BY z.Kodikos
                 LIMIT ? OFFSET ?
             ");
             break;
 
         case 'Είδη':
-            $totalRows = $db->query("SELECT COUNT(*) as count FROM EIDOS")->fetch_assoc()['count'];
-            $stmt = $db->prepare("SELECT * FROM EIDOS LIMIT ? OFFSET ?");
+            $totalRows = $db->query("SELECT COUNT(*) as count FROM eidos")->fetch_assoc()['count'];
+            $stmt = $db->prepare("SELECT * FROM eidos LIMIT ? OFFSET ?");
             break;
 
          case 'Εκδηλώσεις':
-                $totalRows = $db->query("SELECT COUNT(*) as count FROM EKDILOSI")->fetch_assoc()['count'];
+                $totalRows = $db->query("SELECT COUNT(*) as count FROM ekdilosi")->fetch_assoc()['count'];
                 $stmt = $db->prepare("
-                    SELECT Titlos, Hmerominia, 
+                    SELECT Titlos, Hmerominia,
                     TIME_FORMAT(Ora, '%H:%i') as Ora,
                     Xwros
-                    FROM EKDILOSI 
+                    FROM ekdilosi
                     ORDER BY Hmerominia DESC, Ora
                     LIMIT ? OFFSET ?
                 ");
              break;
 
         case 'Εισιτήρια':
-            $totalRows = $db->query("SELECT COUNT(*) as count FROM EISITIRIO")->fetch_assoc()['count'];
+            $totalRows = $db->query("SELECT COUNT(*) as count FROM eisitirio")->fetch_assoc()['count'];
             $stmt = $db->prepare("
-                SELECT * FROM EISITIRIO 
+                SELECT * FROM eisitirio
                 ORDER BY Hmerominia_Ekdoshs DESC, Kodikos
                 LIMIT ? OFFSET ?
             ");
             break;
 
         case 'Ταμίες':
-            $totalRows = $db->query("SELECT COUNT(*) as count FROM TAMIAS")->fetch_assoc()['count'];
-            $stmt = $db->prepare("SELECT * FROM TAMIAS LIMIT ? OFFSET ?");
+            $totalRows = $db->query("SELECT COUNT(*) as count FROM tamias")->fetch_assoc()['count'];
+            $stmt = $db->prepare("SELECT * FROM tamias LIMIT ? OFFSET ?");
             break;
 
         case 'Επισκέπτες':
-            $totalRows = $db->query("SELECT COUNT(*) as count FROM EPISKEPTIS")->fetch_assoc()['count'];
-            $stmt = $db->prepare("SELECT * FROM EPISKEPTIS LIMIT ? OFFSET ?");
+            $totalRows = $db->query("SELECT COUNT(*) as count FROM episkeptis")->fetch_assoc()['count'];
+            $stmt = $db->prepare("SELECT * FROM episkeptis LIMIT ? OFFSET ?");
             break;
 
         case 'Φροντιστές':
-            $totalRows = $db->query("SELECT COUNT(*) as count FROM FRONTISTIS")->fetch_assoc()['count'];
+            $totalRows = $db->query("SELECT COUNT(*) as count FROM frontistis")->fetch_assoc()['count'];
             $stmt = $db->prepare("
                 SELECT f.ID, f.Onoma, f.Eponymo
-                FROM FRONTISTIS f
+                FROM frontistis f
                 ORDER BY f.ID
                 LIMIT ? OFFSET ?
             ");
             break;
 
         case 'Προμηθευτές':
-            $totalRows = $db->query("SELECT COUNT(*) as count FROM PROMITHEUTIS")->fetch_assoc()['count'];
+            $totalRows = $db->query("SELECT COUNT(*) as count FROM promitheutis")->fetch_assoc()['count'];
             $stmt = $db->prepare("
                 SELECT p.AFM, p.Onoma, p.Thlefono
-                FROM PROMITHEUTIS p
+                FROM promitheutis p
                 LIMIT ? OFFSET ?
             ");
             break;
