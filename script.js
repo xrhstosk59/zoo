@@ -1,12 +1,12 @@
 // Import all operations
 import { createZwoForm, handleZwoDelete } from './ZWO/zwo.js';
 import { createTamiasForm, handleTamiasDelete } from './TAMIAS/tamias.js';
-import { createFrontistisForm, handleFrontistisDelete } from './frontistis/frontistis.js';
-import { createepiskeptisForm, handleepiskeptisDelete } from './episkeptis/episkeptis.js';
+import { createFrontistisForm, handleFrontistisDelete } from './FRONTISTIS/frontistis.js';
+import { createepiskeptisForm, handleepiskeptisDelete } from './EPISKEPTIS/episkeptis.js';
 import { createEisitirioForm, handleEisitirioDelete } from './EISITIRIO/eisitirio.js';
 import { createEkdilosiForm, handleEkdilosiDelete } from './EKDILOSI/ekdilosi.js';
 import { createeidosForm, handleeidosDelete } from './EIDOS/eidos.js';
-import { createpromitheutisForm, handlepromitheutisDelete } from './promitheutis/promitheutis.js';
+import { createpromitheutisForm, handlepromitheutisDelete } from './PROMITHEUTIS/promitheutis.js';
 
 // script.js
 export async function loadData(section, page = 1) {
