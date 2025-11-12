@@ -7,6 +7,12 @@ class Database {
     private $conn;
 
     public function __construct() {
+        // Διάβασμα από environment variables με fallback σε default τιμές
+        $this->host = getenv('DB_HOST') ?: 'localhost';
+        $this->username = getenv('DB_USERNAME') ?: 'root';
+        $this->password = getenv('DB_PASSWORD') ?: '';
+        $this->database = getenv('DB_DATABASE') ?: 'zwologikos_khpos';
+
         try {
             // Φόρτωση configuration
             $config = require_once __DIR__ . '/config.php';
