@@ -26,7 +26,7 @@
 ## 🚀 Τεχνολογίες
 
 ### Backend
-- **PHP 7.4+** - Server-side logic
+- **PHP 8.2+** - Server-side logic
 - **MySQL/MariaDB** - Βάση δεδομένων
 - **MySQLi** - Database connection με prepared statements
 
@@ -40,7 +40,7 @@
 
 ### Προαπαιτούμενα
 - Web Server (Apache/Nginx) ή XAMPP
-- PHP 7.4 ή νεότερη έκδοση
+- PHP 8.2 ή νεότερη έκδοση
 - MySQL 5.7+ ή MariaDB 10.2+
 - Browser με υποστήριξη ES6 modules
 
@@ -74,15 +74,15 @@
 
 ### ☁️ Deployment στο Railway
 
-Για production deployment στο Railway, δες τις αναλυτικές οδηγίες στο [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md)
-
-**Σύντομα βήματα:**
+**Σύντομα βήματα για Railway:**
 1. Push το project στο GitHub
 2. Σύνδεση Railway με GitHub
 3. Προσθήκη MySQL service
 4. Import της βάσης
 5. Ρύθμιση Environment Variables
 6. Auto-deploy!
+
+Το project δεν χρειάζεται Vercel. Το Railway αρκεί, γιατί το app είναι κλασικό PHP + MySQL deployment.
 
 ### 🔧 Environment Variables
 
@@ -115,7 +115,6 @@ zoo/
 ├── ZWO/                        # Διαχείριση ζώων
 ├── .env.example                # Environment variables template
 ├── .gitignore                  # Git ignore rules
-├── RAILWAY_DEPLOYMENT.md       # Railway deployment guide
 ├── db_connection.php           # Database connection με env vars
 ├── db.php                      # API endpoint για data fetching
 ├── index.html                  # Main HTML file
@@ -200,7 +199,6 @@ zoo/
 - Χρησιμοποίησε web server (όχι file://)
 
 ### Railway Deployment Issues
-- Δες το [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md) για troubleshooting tips
 - Έλεγξε τα Logs: Railway → zoo service → "Logs" tab
 - Επιβεβαίωσε ότι όλα τα Environment Variables έχουν οριστεί
 
@@ -267,7 +265,7 @@ zoo/
 
 ### v2.0 - Railway Deployment Ready (2025-11-12)
 - ✅ **Environment Variables Support** - Υποστήριξη για production deployments
-- ✅ **Railway Deployment** - Πλήρες deployment guide
+- ✅ **Railway Deployment** - Έτοιμο για deployment με env vars και PHP runtime
 - ✅ **Database Migration** - Import στο Railway MySQL επιτυχώς
 - ✅ **Updated README** - Νέες οδηγίες για XAMPP και Railway
 - ✅ **Simplified Configuration** - Αυτόματη ρύθμιση για local development
@@ -296,7 +294,6 @@ zoo/
 ## 📖 Documentation
 
 - **[README.md](./README.md)** - Αυτό το αρχείο
-- **[RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md)** - Οδηγίες για Railway deployment
 - **[.env.example](./.env.example)** - Environment variables template
 
 ---

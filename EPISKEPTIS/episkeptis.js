@@ -102,7 +102,7 @@ async function handleepiskeptisSubmit(event, formType) {
 
     try {
         const formData = new FormData(event.target);
-        const url = `./episkeptis/${formType === 'Προσθήκη' ? 'add' : 'update'}_episkepti.php`;
+        const url = `./EPISKEPTIS/${formType === 'Προσθήκη' ? 'add' : 'update'}_episkepti.php`;
 
         const response = await fetch(url, {
             method: 'POST',
@@ -130,7 +130,7 @@ async function handleepiskeptisDelete(data) {
 
     try {
         showLoading();
-        const response = await fetch('./episkeptis/delete_episkepti.php', {
+        const response = await fetch('./EPISKEPTIS/delete_episkepti.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

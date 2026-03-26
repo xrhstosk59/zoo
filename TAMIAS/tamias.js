@@ -87,7 +87,7 @@ async function handleTamiasSubmit(event, formType) {
 
     try {
         const formData = new FormData(event.target);
-        const url = `./tamias/${formType === 'Προσθήκη' ? 'add' : 'update'}_tamia.php`;
+        const url = `./TAMIAS/${formType === 'Προσθήκη' ? 'add' : 'update'}_tamia.php`;
 
         const response = await fetch(url, {
             method: 'POST',
@@ -115,7 +115,7 @@ async function handleTamiasDelete(data) {
 
     try {
         showLoading();
-        const response = await fetch('./tamias/delete_tamia.php', {
+        const response = await fetch('./TAMIAS/delete_tamia.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -86,7 +86,7 @@ async function handlepromitheutisSubmit(event, formType) {
 
     try {
         const formData = new FormData(event.target);
-        const url = `./promitheutis/${formType === 'Προσθήκη' ? 'add' : 'update'}_promitheuti.php`;
+        const url = `./PROMITHEUTIS/${formType === 'Προσθήκη' ? 'add' : 'update'}_promitheuti.php`;
 
         const response = await fetch(url, {
             method: 'POST',
@@ -114,7 +114,7 @@ async function handlepromitheutisDelete(data) {
 
     try {
         showLoading();
-        const response = await fetch('./promitheutis/delete_promitheuti.php', {
+        const response = await fetch('./PROMITHEUTIS/delete_promitheuti.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

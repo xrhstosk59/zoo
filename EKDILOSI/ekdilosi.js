@@ -103,7 +103,7 @@ async function handleEkdilosiSubmit(event, formType) {
        }
 
        const formData = new FormData(event.target);
-       const url = `/db2/student_2410/ZWOLOGIKOS_KHPOS/ekdilosi/${formType === 'Προσθήκη' ? 'add' : 'update'}_ekdilosi.php`;
+       const url = `./EKDILOSI/${formType === 'Προσθήκη' ? 'add' : 'update'}_ekdilosi.php`;
 
        const response = await fetch(url, {
            method: 'POST',
@@ -134,7 +134,7 @@ async function handleEkdilosiDelete(data) {
 
    try {
        showLoading();
-       const response = await fetch('/db2/student_2410/ZWOLOGIKOS_KHPOS/ekdilosi/delete_ekdilosi.php', {
+       const response = await fetch('./EKDILOSI/delete_ekdilosi.php', {
            method: 'POST',
            headers: {
                'Content-Type': 'application/json'

@@ -110,7 +110,7 @@ async function handleeidosSubmit(event, formType) {
 
     try {
         const formData = new FormData(event.target);
-        const url = `/db2/student_2410/ZWOLOGIKOS_KHPOS/eidos/${formType === 'Προσθήκη' ? 'add' : 'update'}_eidos.php`;
+        const url = `./EIDOS/${formType === 'Προσθήκη' ? 'add' : 'update'}_eidos.php`;
 
         const response = await fetch(url, {
             method: 'POST',
@@ -138,7 +138,7 @@ async function handleeidosDelete(data) {
 
     try {
         showLoading();
-        const response = await fetch('/db2/student_2410/ZWOLOGIKOS_KHPOS/eidos/delete_eidos.php', {
+        const response = await fetch('./EIDOS/delete_eidos.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

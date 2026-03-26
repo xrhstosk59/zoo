@@ -130,7 +130,7 @@ async function handleEisitirioSubmit(event, formType) {
         }
 
         const formData = new FormData(event.target);
-        const url = `./eisitirio/${formType === 'Προσθήκη' ? 'add' : 'update'}_eisitirio.php`;
+        const url = `./EISITIRIO/${formType === 'Προσθήκη' ? 'add' : 'update'}_eisitirio.php`;
 
         const response = await fetch(url, {
             method: 'POST',
@@ -161,7 +161,7 @@ async function handleEisitirioDelete(data) {
 
     try {
         showLoading();
-        const response = await fetch('./eisitirio/delete_eisitirio.php', {
+        const response = await fetch('./EISITIRIO/delete_eisitirio.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

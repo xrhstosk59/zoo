@@ -7,7 +7,7 @@ const zwoFields = [
     { name: 'kodikos', label: 'Κωδικός', required: true, pattern: '^[Zz]\\d{6}$', type: 'text' },
     { name: 'onoma', label: 'Όνομα', required: true, type: 'text' },
     { name: 'etos_genesis', label: 'Έτος Γέννησης', required: true, type: 'number', min: 1900, max: new Date().getFullYear() },
-    { name: 'onoma_eidous', label: 'Είδος', required: true, type: 'select', dataSource: 'get_species.php' }
+    { name: 'onoma_eidous', label: 'Είδος', required: true, type: 'select', dataSource: './get_species.php' }
 ];
 
 function createZwoForm(formType, data = null) {
@@ -123,7 +123,7 @@ async function handleZwoSubmit(event, formType) {
     try {
         const formData = new FormData(event.target);
         // Στην handleZwoSubmit 
-        const url = `/db2/student_2410/ZWOLOGIKOS_KHPOS/zwo/${formType === 'Προσθήκη' ? 'add' : 'update'}_zwo.php`;
+        const url = `./ZWO/${formType === 'Προσθήκη' ? 'add' : 'update'}_zwo.php`;
 
         const response = await fetch(url, {
             method: 'POST',
@@ -154,7 +154,7 @@ async function handleZwoDelete(data) {
 
     try {
         showLoading();
-        const response = await fetch('/db2/student_2410/ZWOLOGIKOS_KHPOS/zwo/delete_zwo.php', {
+        const response = await fetch('./ZWO/delete_zwo.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
